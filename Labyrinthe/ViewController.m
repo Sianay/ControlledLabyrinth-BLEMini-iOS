@@ -22,13 +22,27 @@
     
     self.motionView.layer.cornerRadius = 50;
     
+    UITapGestureRecognizer *touchOnView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchBall)] ;
+    
+    // Set required taps and number of touches
+    [touchOnView setNumberOfTapsRequired:1];
+    [touchOnView setNumberOfTouchesRequired:1];
+    
+    // Add the gesture to the view
+    [self.motionView addGestureRecognizer:touchOnView];
+    
+}
+
+
+-(void) touchBall{
+    [self startMyMotionDetect];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     
     [super viewDidAppear:animated];
     
-    [self startMyMotionDetect];
+
 }
 
 
@@ -51,26 +65,25 @@
 {
     __block float stepMoveFactor = 15;
     
+    self.startLabel.hidden = YES;
+    
     [[[MotionManager sharedInstance] motionManager] startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init] withHandler:^(CMAccelerometerData *data, NSError *error)
      {
-
-        // self.xLabel.text = [NSString stringWithFormat:@"X : %f",data.acceleration.x];
-        // self.yLabel.text = [NSString stringWithFormat:@"Y : %f",data.acceleration.y];
          
          dispatch_async(dispatch_get_main_queue(),
                         ^{
-                            
-                             
                             CGRect rect = self.motionView.frame;
                             
-                            float movetoX = rect.origin.x + (data.acceleration.x * stepMoveFactor);
+                           // NSLog(@"%f %f",data.acceleration.x,data.acceleration.y);
+                            
+                            float movetoX = rect.origin.x - (data.acceleration.y * stepMoveFactor);
                             float maxX = self.view.frame.size.width - rect.size.width;
                             
-                            float movetoY = (rect.origin.y + rect.size.height) - (data.acceleration.y * stepMoveFactor);
+                            float movetoY = (rect.origin.y + rect.size.height) - (data.acceleration.x * stepMoveFactor);
                             float maxY = self.view.frame.size.height;
                             
-                            if ( movetoX > 0 && movetoX < maxX ) {rect.origin.x += (data.acceleration.x * stepMoveFactor);};
-                            if ( movetoY > rect.size.height && movetoY < maxY ) {rect.origin.y -= (data.acceleration.y * stepMoveFactor);};
+                            if ( movetoX > 0 && movetoX < maxX ) {rect.origin.x -= (data.acceleration.y * stepMoveFactor);};
+                            if ( movetoY > rect.size.height && movetoY < maxY ) {rect.origin.y -= (data.acceleration.x * stepMoveFactor);};
                             
                             [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:
                              ^{
