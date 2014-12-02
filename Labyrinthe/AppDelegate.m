@@ -7,8 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import <CoreMotion/CoreMotion.h>
 
 @interface AppDelegate ()
+
 
 @end
 

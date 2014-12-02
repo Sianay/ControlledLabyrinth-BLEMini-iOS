@@ -14,6 +14,8 @@
 		4A387ACF1A2DB2B300B391D5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A387ACE1A2DB2B300B391D5 /* Images.xcassets */; };
 		4A387AD21A2DB2B300B391D5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A387AD01A2DB2B300B391D5 /* LaunchScreen.xib */; };
 		4A387ADE1A2DB2B300B391D5 /* LabyrintheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A387ADD1A2DB2B300B391D5 /* LabyrintheTests.m */; };
+		4A387AE81A2DD0A700B391D5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A387AE71A2DD0A700B391D5 /* CoreMotion.framework */; };
+		4A387AEB1A2DF22500B391D5 /* MotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A387AEA1A2DF22500B391D5 /* MotionManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,9 @@
 		4A387AD71A2DB2B300B391D5 /* LabyrintheTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LabyrintheTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A387ADC1A2DB2B300B391D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A387ADD1A2DB2B300B391D5 /* LabyrintheTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LabyrintheTests.m; sourceTree = "<group>"; };
+		4A387AE71A2DD0A700B391D5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		4A387AE91A2DF22500B391D5 /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
+		4A387AEA1A2DF22500B391D5 /* MotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A387AE81A2DD0A700B391D5 /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,11 +89,14 @@
 			children = (
 				4A387AC51A2DB2B300B391D5 /* AppDelegate.h */,
 				4A387AC61A2DB2B300B391D5 /* AppDelegate.m */,
+				4A387AE91A2DF22500B391D5 /* MotionManager.h */,
+				4A387AEA1A2DF22500B391D5 /* MotionManager.m */,
 				4A387AC81A2DB2B300B391D5 /* ViewController.h */,
 				4A387AC91A2DB2B300B391D5 /* ViewController.m */,
 				4A387ACB1A2DB2B300B391D5 /* Main.storyboard */,
 				4A387ACE1A2DB2B300B391D5 /* Images.xcassets */,
 				4A387AD01A2DB2B300B391D5 /* LaunchScreen.xib */,
+				4A387AE71A2DD0A700B391D5 /* CoreMotion.framework */,
 				4A387AC11A2DB2B300B391D5 /* Supporting Files */,
 			);
 			path = Labyrinthe;
@@ -222,6 +231,7 @@
 				4A387ACA1A2DB2B300B391D5 /* ViewController.m in Sources */,
 				4A387AC71A2DB2B300B391D5 /* AppDelegate.m in Sources */,
 				4A387AC41A2DB2B300B391D5 /* main.m in Sources */,
+				4A387AEB1A2DF22500B391D5 /* MotionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +354,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Labyrinthe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -354,6 +365,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Labyrinthe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -412,6 +424,7 @@
 				4A387AE31A2DB2B300B391D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4A387AE41A2DB2B300B391D5 /* Build configuration list for PBXNativeTarget "LabyrintheTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +433,7 @@
 				4A387AE61A2DB2B300B391D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
