@@ -1,14 +1,131 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BUs-SC-oB0">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="s7U-of-Hpk">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="BUs-SC-oB0" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GtE-Va-fO7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VFj-IY-S2Y" kind="relationship" relationship="rootViewController" id="Wec-kK-Hnf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AjP-b7-LFZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-524" y="369"/>
+        </scene>
+        <!--Connection View Controller-->
+        <scene sceneID="SDQ-d6-81o">
+            <objects>
+                <viewController id="VFj-IY-S2Y" customClass="ConnectionViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BvA-kb-bv5"/>
+                        <viewControllerLayoutGuide type="bottom" id="eT9-cS-Wts"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FAr-9P-evC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pn0-3m-pnH">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="JAf-gq-fd4"/>
+                                    <constraint firstAttribute="height" constant="30" id="ivy-Hp-wRQ"/>
+                                </constraints>
+                                <state key="normal" title="Connect">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="JAf-gq-fd4"/>
+                                        <exclude reference="ivy-Hp-wRQ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="JAf-gq-fd4"/>
+                                        <include reference="ivy-Hp-wRQ"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="connectionAction:" destination="VFj-IY-S2Y" eventType="touchUpInside" id="j3o-jz-tBw"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bUs-6q-Y1D">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="e8s-Wd-dSa"/>
+                                    <constraint firstAttribute="width" constant="20" id="uxn-bf-yki"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="e8s-Wd-dSa"/>
+                                        <exclude reference="uxn-bf-yki"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="e8s-Wd-dSa"/>
+                                        <include reference="uxn-bf-yki"/>
+                                    </mask>
+                                </variation>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Pn0-3m-pnH" secondAttribute="centerX" id="03P-Fy-bap"/>
+                            <constraint firstItem="bUs-6q-Y1D" firstAttribute="top" secondItem="Pn0-3m-pnH" secondAttribute="bottom" constant="14" id="0lo-re-iwy"/>
+                            <constraint firstAttribute="centerY" secondItem="Pn0-3m-pnH" secondAttribute="centerY" id="NBe-AI-M0B"/>
+                            <constraint firstAttribute="centerX" secondItem="bUs-6q-Y1D" secondAttribute="centerX" id="wGF-LN-APT"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Pn0-3m-pnH"/>
+                                <exclude reference="bUs-6q-Y1D"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="0lo-re-iwy"/>
+                                <exclude reference="wGF-LN-APT"/>
+                                <exclude reference="03P-Fy-bap"/>
+                                <exclude reference="NBe-AI-M0B"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="subviews">
+                                <include reference="Pn0-3m-pnH"/>
+                                <include reference="bUs-6q-Y1D"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="0lo-re-iwy"/>
+                                <include reference="wGF-LN-APT"/>
+                                <include reference="03P-Fy-bap"/>
+                                <include reference="NBe-AI-M0B"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="UFQ-YZ-U99"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="bUs-6q-Y1D" id="E4e-iR-mEm"/>
+                        <segue destination="vXZ-lx-hvc" kind="show" identifier="pushToGame" id="aWQ-IL-EoQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lMp-KN-9hm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="254" y="369"/>
+        </scene>
+        <!--Game View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="GameViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -94,6 +211,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1015" y="369"/>
         </scene>
     </scenes>
 </document>

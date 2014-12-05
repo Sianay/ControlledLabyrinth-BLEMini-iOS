@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BLELabyrinth.h"
 
-@interface ViewController : UIViewController
+@interface GameViewController : UIViewController<BLEDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UIView *motionView;

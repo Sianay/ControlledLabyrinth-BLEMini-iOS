@@ -6,16 +6,17 @@
 //  Copyright (c) 2014 ARLEM. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "GameViewController.h"
 #import <CoreMotion/CoreMotion.h>
 #import "MotionManager.h"
 
-@interface ViewController ()
+
+@interface GameViewController ()
 
 
 @end
 
-@implementation ViewController
+@implementation GameViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,6 +34,9 @@
     
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    // [[BLELabyrinth sharedInstance] bleShield].delegate = self;
+}
 
 -(void) touchBall{
     [self startMyMotionDetect];
@@ -73,8 +77,7 @@
          dispatch_async(dispatch_get_main_queue(),
                         ^{
                             CGRect rect = self.motionView.frame;
-                            
-                           // NSLog(@"%f %f",data.acceleration.x,data.acceleration.y);
+
                             
                             float movetoX = rect.origin.x - (data.acceleration.y * stepMoveFactor);
                             float maxX = self.view.frame.size.width - rect.size.width;
