@@ -102,10 +102,10 @@
 			children = (
 				4A387AC51A2DB2B300B391D5 /* AppDelegate.h */,
 				4A387AC61A2DB2B300B391D5 /* AppDelegate.m */,
-				4A387AC81A2DB2B300B391D5 /* GameViewController.h */,
-				4A387AC91A2DB2B300B391D5 /* GameViewController.m */,
 				4ADC2C891A31A597002C2994 /* ConnectionViewController.h */,
 				4ADC2C8A1A31A597002C2994 /* ConnectionViewController.m */,
+				4A387AC81A2DB2B300B391D5 /* GameViewController.h */,
+				4A387AC91A2DB2B300B391D5 /* GameViewController.m */,
 				4ADC2C8C1A31A63F002C2994 /* Manager */,
 				4A387ACE1A2DB2B300B391D5 /* Images.xcassets */,
 				4A387ACB1A2DB2B300B391D5 /* Main.storyboard */,

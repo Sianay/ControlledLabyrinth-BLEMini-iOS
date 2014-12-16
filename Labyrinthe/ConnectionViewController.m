@@ -32,7 +32,6 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
-   // [[BLELabyrinth sharedInstance] bleShield].delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {

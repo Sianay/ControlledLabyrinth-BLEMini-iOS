@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *motionView;
 @property (weak, nonatomic) IBOutlet UILabel *startLabel;
+@property (weak, nonatomic) IBOutlet UIButton *stopButton;
 
 
 @end

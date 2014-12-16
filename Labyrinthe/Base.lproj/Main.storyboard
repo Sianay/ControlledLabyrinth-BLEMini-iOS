@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -177,28 +178,69 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="af0-Fp-LNy">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="a3v-PP-u0y"/>
+                                    <constraint firstAttribute="height" constant="30" id="tCL-8i-rdq"/>
+                                </constraints>
+                                <state key="normal" title="Stop">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="a3v-PP-u0y"/>
+                                        <exclude reference="tCL-8i-rdq"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="a3v-PP-u0y"/>
+                                        <include reference="tCL-8i-rdq"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="stopAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6h9-Iy-LZZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="2nU-8O-k90" secondAttribute="centerX" id="50y-Bt-XCk"/>
+                            <constraint firstItem="af0-Fp-LNy" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="LTv-M7-MOr"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="af0-Fp-LNy" secondAttribute="bottom" constant="342" id="PEj-0S-458"/>
                             <constraint firstAttribute="centerY" secondItem="2nU-8O-k90" secondAttribute="centerY" id="U3M-CV-ALS"/>
+                            <constraint firstItem="af0-Fp-LNy" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="502" id="Zxc-Wa-vnd"/>
+                            <constraint firstItem="af0-Fp-LNy" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="hCd-6U-LRC"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="2nU-8O-k90"/>
+                                <exclude reference="af0-Fp-LNy"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="50y-Bt-XCk"/>
                                 <exclude reference="U3M-CV-ALS"/>
+                                <exclude reference="PEj-0S-458"/>
+                                <exclude reference="LTv-M7-MOr"/>
+                                <exclude reference="Zxc-Wa-vnd"/>
+                                <exclude reference="hCd-6U-LRC"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="subviews">
                                 <include reference="2nU-8O-k90"/>
+                                <include reference="af0-Fp-LNy"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="50y-Bt-XCk"/>
                                 <include reference="U3M-CV-ALS"/>
+                                <include reference="PEj-0S-458"/>
+                                <include reference="LTv-M7-MOr"/>
+                                <exclude reference="Zxc-Wa-vnd"/>
+                                <include reference="hCd-6U-LRC"/>
                             </mask>
                         </variation>
                     </view>
@@ -207,11 +249,12 @@
                     <connections>
                         <outlet property="motionView" destination="2nU-8O-k90" id="CYc-gh-NVf"/>
                         <outlet property="startLabel" destination="F9u-dH-VLD" id="N1F-2b-MEl"/>
+                        <outlet property="stopButton" destination="af0-Fp-LNy" id="ukV-Xx-wpr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1015" y="369"/>
+            <point key="canvasLocation" x="1151" y="382.5"/>
         </scene>
     </scenes>
 </document>

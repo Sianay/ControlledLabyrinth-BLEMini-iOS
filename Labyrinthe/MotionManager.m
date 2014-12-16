@@ -31,6 +31,7 @@ static MotionManager *sharedInstance = nil;
     self = [super init];
     if (self) {
         self.motionManager = [[CMMotionManager alloc] init];
+        //self.motionManager.accelerometerUpdateInterval = 0.05;
         
     }
     

@@ -8,10 +8,13 @@
 
 #import "BLELabyrinth.h"
 
-@interface BLELabyrinth()
+@interface BLELabyrinth(){
+    int cpt;
+}
 
 @property (nonatomic, strong) void(^didConnectcompletionHandler)();
 @property (nonatomic, strong) void(^didFailcompletionHandler)();
+@property (nonatomic, strong) void(^didReceiveAuthorizationToWrite)();
 
 @end
 
@@ -36,6 +39,7 @@ static BLELabyrinth *sharedInstance = nil;
         bleShield = [[BLE alloc] init];
         [bleShield controlSetup];
         bleShield.delegate = self;
+        cpt = 0;
     }
     
     return self;
@@ -43,10 +47,10 @@ static BLELabyrinth *sharedInstance = nil;
 
 - (void) startConnection{
     
-    if ([[BLELabyrinth sharedInstance] bleShield].activePeripheral)
-        if([[BLELabyrinth sharedInstance] bleShield].activePeripheral.isConnected)
+    if (bleShield.activePeripheral)
+        if(bleShield.activePeripheral.state == CBPeripheralStateConnected)
         {
-            [[[[BLELabyrinth sharedInstance] bleShield] CM] cancelPeripheralConnection:[[[BLELabyrinth sharedInstance] bleShield] activePeripheral]];
+            [[bleShield CM] cancelPeripheralConnection:bleShield.activePeripheral];
             return;
         }
     
@@ -75,16 +79,39 @@ static BLELabyrinth *sharedInstance = nil;
     _didFailcompletionHandler = errorHandler;
 }
 
+-(void) didReceiveAuthorizationToWrite:(void (^)())handler{
+    _didReceiveAuthorizationToWrite = handler;
+}
+
+- (void) writeMessage:(NSString *)message {
+    
+    NSData *d = [message dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [bleShield write:d];
+    
+}
 
 #pragma mark - BLE delegate
 
--(void) bleDidConnect
-{
+-(void) bleDidConnect{
     _didConnectcompletionHandler();
     
 }
 
+-(void) bleDidReceiveData:(unsigned char *) data length:(int) length{
+    
+    NSData *d = [NSData dataWithBytes:data length:length];
+    NSString *s = [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding];
+    NSLog(@"data : %@",s);
+    
+    if ([s containsString:@"go"]){
+        
+        NSLog(@"%d",cpt++);
+        _didReceiveAuthorizationToWrite();
+    }
 
+    
+}
 
 
 @end

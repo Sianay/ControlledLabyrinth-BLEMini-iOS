@@ -11,7 +11,9 @@
 #import "MotionManager.h"
 
 
-@interface GameViewController ()
+@interface GameViewController (){
+    BOOL authorizeToSend;
+}
 
 
 @end
@@ -20,6 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    authorizeToSend = YES;
+    self.stopButton.hidden = YES;
     
     self.motionView.layer.cornerRadius = 50;
     
@@ -32,6 +37,11 @@
     // Add the gesture to the view
     [self.motionView addGestureRecognizer:touchOnView];
     
+    [[BLELabyrinth sharedInstance] didReceiveAuthorizationToWrite:^{
+        authorizeToSend = YES;
+    }];
+    
+    
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -42,11 +52,20 @@
     [self startMyMotionDetect];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (IBAction)stopAction:(id)sender {
     
-    [super viewDidAppear:animated];
+    self.startLabel.hidden = NO;
+    self.stopButton.hidden = YES;
+    [[[MotionManager sharedInstance] motionManager] stopAccelerometerUpdates];
+    authorizeToSend = YES;
     
+    self.motionView.center = self.view.center;
+    
+    
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 
@@ -70,6 +89,7 @@
     __block float stepMoveFactor = 15;
     
     self.startLabel.hidden = YES;
+    self.stopButton.hidden = NO;
     
     [[[MotionManager sharedInstance] motionManager] startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init] withHandler:^(CMAccelerometerData *data, NSError *error)
      {
@@ -77,7 +97,6 @@
          dispatch_async(dispatch_get_main_queue(),
                         ^{
                             CGRect rect = self.motionView.frame;
-
                             
                             float movetoX = rect.origin.x - (data.acceleration.y * stepMoveFactor);
                             float maxX = self.view.frame.size.width - rect.size.width;
@@ -91,17 +110,30 @@
                             [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:
                              ^{
                                  self.motionView.frame = rect;
-  
+
                              }
-                                             completion:nil
-                             
-                             ];
+                             completion:nil];
+                            
+                            if (authorizeToSend){
+                              [self sendAccelerometerDataToBLEMiniX:data.acceleration.x andY:data.acceleration.y];
+                            }
+
                             
                         });
      }
      ];
     
+}
+
+-(void) sendAccelerometerDataToBLEMiniX:(double) xAcceleration andY:(double) yAcceleration{
     
+    NSString *message = [NSString stringWithFormat:@"%f,%f/",xAcceleration,yAcceleration];
+    
+    NSLog(@"send : %@",message);
+    
+    [[BLELabyrinth sharedInstance] writeMessage:message];
+    
+    authorizeToSend = NO;
 }
 
 @end
