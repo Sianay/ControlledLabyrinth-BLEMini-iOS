@@ -26,7 +26,15 @@
         NSLog(@"right!");
     } orDidFail:^{
         [self.activityIndicator stopAnimating];
-        NSLog(@"fail");
+        
+        UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Echec de la connection"
+                                                         message:@"Impossible de se connecter au BLE Mini"
+                                                        delegate:self
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+        [dialog show];
+        
+        
     }];
     
 }
@@ -52,6 +60,8 @@
 - (IBAction)connectionAction:(id)sender {
     [self.activityIndicator startAnimating];
     [[BLELabyrinth sharedInstance] startConnection];
+    
+    // [self performSegueWithIdentifier:@"pushToGame" sender:self];
 }
 
 

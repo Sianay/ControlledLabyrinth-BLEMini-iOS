@@ -9,12 +9,12 @@
 #import "BLELabyrinth.h"
 
 @interface BLELabyrinth(){
-    int cpt;
 }
 
 @property (nonatomic, strong) void(^didConnectcompletionHandler)();
 @property (nonatomic, strong) void(^didFailcompletionHandler)();
 @property (nonatomic, strong) void(^didReceiveAuthorizationToWrite)();
+@property (nonatomic, strong) void(^didDisconnectcompletionHandler)();
 
 @end
 
@@ -39,7 +39,6 @@ static BLELabyrinth *sharedInstance = nil;
         bleShield = [[BLE alloc] init];
         [bleShield controlSetup];
         bleShield.delegate = self;
-        cpt = 0;
     }
     
     return self;
@@ -83,6 +82,10 @@ static BLELabyrinth *sharedInstance = nil;
     _didReceiveAuthorizationToWrite = handler;
 }
 
+- (void) didDisconnectwithCompletionHandler:(void(^)())handler{
+    _didDisconnectcompletionHandler = handler;
+}
+
 - (void) writeMessage:(NSString *)message {
     
     NSData *d = [message dataUsingEncoding:NSUTF8StringEncoding];
@@ -98,6 +101,13 @@ static BLELabyrinth *sharedInstance = nil;
     
 }
 
+-(void) bleDidDisconnect{
+    if (_didDisconnectcompletionHandler != nil){
+            _didDisconnectcompletionHandler();
+    }
+}
+
+
 -(void) bleDidReceiveData:(unsigned char *) data length:(int) length{
     
     NSData *d = [NSData dataWithBytes:data length:length];
@@ -105,8 +115,6 @@ static BLELabyrinth *sharedInstance = nil;
     NSLog(@"data : %@",s);
     
     if ([s containsString:@"go"]){
-        
-        NSLog(@"%d",cpt++);
         _didReceiveAuthorizationToWrite();
     }
 

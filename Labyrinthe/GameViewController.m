@@ -10,6 +10,8 @@
 #import <CoreMotion/CoreMotion.h>
 #import "MotionManager.h"
 
+/** Radians to Degrees **/
+#define radiansToDegrees( radians ) ( ( radians ) * ( 180.0 / M_PI ) )
 
 @interface GameViewController (){
     BOOL authorizeToSend;
@@ -23,8 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    authorizeToSend = YES;
-    self.stopButton.hidden = YES;
+    [self setStopState];
     
     self.motionView.layer.cornerRadius = 50;
     
@@ -54,14 +55,36 @@
 
 - (IBAction)stopAction:(id)sender {
     
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    
+    [UIView animateWithDuration:3.0
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         self.motionView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+                     }
+                     completion:^(BOOL finished){
+                        [self.view setBackgroundColor:[UIColor whiteColor]];
+                         
+                         self.motionView.center = self.view.center;
+                         self.motionView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                         
+                         [self setStopState];
+                         
+                         [[[MotionManager sharedInstance] motionManager] stopAccelerometerUpdates];
+                         [[[MotionManager sharedInstance] motionManager] stopDeviceMotionUpdates];
+                         
+                         
+                         
+                         
+                     }];
+}
+
+-(void) setStopState{
+    
     self.startLabel.hidden = NO;
     self.stopButton.hidden = YES;
-    [[[MotionManager sharedInstance] motionManager] stopAccelerometerUpdates];
     authorizeToSend = YES;
-    
-    self.motionView.center = self.view.center;
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -75,6 +98,7 @@
     [super viewDidDisappear:animated];
     
     [[[MotionManager sharedInstance] motionManager] stopAccelerometerUpdates];
+    [[[MotionManager sharedInstance] motionManager] stopDeviceMotionUpdates];
     
 }
 
@@ -114,10 +138,24 @@
                              }
                              completion:nil];
                             
-                            if (authorizeToSend){
-                              [self sendAccelerometerDataToBLEMiniX:data.acceleration.x andY:data.acceleration.y];
-                            }
 
+
+                            
+                        });
+     }
+     ];
+    
+    
+    [[[MotionManager sharedInstance] motionManager] startDeviceMotionUpdatesToQueue:[[NSOperationQueue alloc] init] withHandler:^(CMDeviceMotion *motion, NSError *error)
+     {
+         
+         dispatch_async(dispatch_get_main_queue(),
+                        ^{
+                            
+                            if (authorizeToSend){
+                                
+                                [self sendAccelerometerDataToBLEMiniX:radiansToDegrees(motion.attitude.roll) andY:radiansToDegrees(motion.attitude.pitch)];
+                            }
                             
                         });
      }
@@ -127,7 +165,7 @@
 
 -(void) sendAccelerometerDataToBLEMiniX:(double) xAcceleration andY:(double) yAcceleration{
     
-    NSString *message = [NSString stringWithFormat:@"%f,%f/",xAcceleration,yAcceleration];
+    NSString *message = [NSString stringWithFormat:@"%d,%d/",(int)xAcceleration, (int)yAcceleration];
     
     NSLog(@"send : %@",message);
     
