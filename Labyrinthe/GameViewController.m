@@ -86,20 +86,25 @@
             
             [self performSelector:@selector(stopAction:) withObject:self];
             
+            NSString *winnerTitle = @"Bravo vous avez (enfin) gagné !";
+            NSString *looserTitle = [NSString stringWithFormat:@"Perdu au trou %@",numberHole];
+            
            /* if ([numberHole isEqualToString:@"40"]){
-               self.titleLabel.text = @"Bravo, vous avez (enfin) gagné!";
+               self.titleLabel.text = winnerTitle;
             }else{
                 self.titleLabel.text = [NSString stringWithFormat:@"Dommage...Perdu au trou %@",numberHole];
             }*/
             
             //self.messageLabel.text = [holeMessage objectForKey:numberHole];
+            
 
-            /*UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"trou #%@" ,numberHole]
+
+            UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:[numberHole isEqualToString:@"40"]?winnerTitle:looserTitle
                                                              message:[holeMessage objectForKey:numberHole]
                                                             delegate:self
                                                    cancelButtonTitle:@"OK"
                                                    otherButtonTitles:nil];
-            [dialog show];*/
+            [dialog show];
         }
 
         
