@@ -14,6 +14,7 @@
 @property (nonatomic, strong) void(^didConnectcompletionHandler)();
 @property (nonatomic, strong) void(^didFailcompletionHandler)();
 @property (nonatomic, strong) void(^didReceiveAuthorizationToWrite)();
+@property (nonatomic, strong) void(^didReceiveNumberHole)(NSString* numberHole);
 @property (nonatomic, strong) void(^didDisconnectcompletionHandler)();
 
 @end
@@ -78,8 +79,9 @@ static BLELabyrinth *sharedInstance = nil;
     _didFailcompletionHandler = errorHandler;
 }
 
--(void) didReceiveAuthorizationToWrite:(void (^)())handler{
+- (void) didReceiveAuthorizationToWrite:(void(^)())handler orNumberHole:(void(^)(NSString* numberHole))numberHandler{
     _didReceiveAuthorizationToWrite = handler;
+    _didReceiveNumberHole = numberHandler;
 }
 
 - (void) didDisconnectwithCompletionHandler:(void(^)())handler{
@@ -116,6 +118,8 @@ static BLELabyrinth *sharedInstance = nil;
     
     if ([s containsString:@"go"]){
         _didReceiveAuthorizationToWrite();
+    }else if ([s hasPrefix:@"#"]){
+        _didReceiveNumberHole([s stringByReplacingOccurrencesOfString:@"#" withString:@""]);
     }
 
     

@@ -18,7 +18,7 @@
 - (void) startConnection;
 - (void) didConnectwithCompletionHandler:(void(^)())handler orDidFail:(void(^)())errorHandler;
 - (void) didDisconnectwithCompletionHandler:(void(^)())handler;
-- (void) didReceiveAuthorizationToWrite:(void(^)())handler;
+- (void) didReceiveAuthorizationToWrite:(void(^)())handler orNumberHole:(void(^)(NSString *numberHole))numberHandler;
 - (void) writeMessage:(NSString *)message;
 
 @end

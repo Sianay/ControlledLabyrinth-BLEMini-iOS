@@ -222,12 +222,12 @@
                                 <exclude reference="af0-Fp-LNy"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="50y-Bt-XCk"/>
-                                <exclude reference="U3M-CV-ALS"/>
                                 <exclude reference="PEj-0S-458"/>
                                 <exclude reference="LTv-M7-MOr"/>
                                 <exclude reference="Zxc-Wa-vnd"/>
                                 <exclude reference="hCd-6U-LRC"/>
+                                <exclude reference="50y-Bt-XCk"/>
+                                <exclude reference="U3M-CV-ALS"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
@@ -236,12 +236,12 @@
                                 <include reference="af0-Fp-LNy"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="50y-Bt-XCk"/>
-                                <include reference="U3M-CV-ALS"/>
                                 <include reference="PEj-0S-458"/>
                                 <include reference="LTv-M7-MOr"/>
                                 <exclude reference="Zxc-Wa-vnd"/>
                                 <include reference="hCd-6U-LRC"/>
+                                <include reference="50y-Bt-XCk"/>
+                                <include reference="U3M-CV-ALS"/>
                             </mask>
                         </variation>
                     </view>

@@ -15,6 +15,7 @@
 
 @interface GameViewController (){
     BOOL authorizeToSend;
+    BOOL isPlaying;
 }
 
 
@@ -25,7 +26,87 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSDictionary *holeMessage = @{
+                                @"1" : @"S'abandonner au désespoir sur la ligne de départ, c'est partir perdant",
+                                @"2" : @"Même les yeux fermés, n'importe qui ferait mieux...",
+                                @"3" : @"Même ta mère ferait mieux",
+                                @"4" : @"Saviez-vous que le but de ce jeu c'est de ne PAS tomber dans le trou ?",
+                                @"5" : @"Belle tentative...mais non",
+                                @"6" : @"Parfois, il ne vaut mieux même pas essayer",
+                                @"7" : @"Vous êtes tomber dans le panneau...euh enfin le trou",
+                                @"8" : @"Essayer avec plus de patience la prochaine fois.",
+                                @"9" : @"Tomber la, tomber tomber, tomber la baballe",
+                                @"10" : @"Vous êtes nul",
+                                @"11" : @"Vous êtes nul",
+                                @"12" : @"Vous êtes nul",
+                                @"13" : @"Vous êtes nul",
+                                @"14" : @"Vous êtes nul",
+                                @"15" : @"Vous êtes nul",
+                                @"16" : @"Vous êtes nul",
+                                @"17" : @"Vous êtes nul",
+                                @"18" : @"Vous êtes nul",
+                                @"19" : @"Vous êtes nul",
+                                @"20" : @"Vous êtes nul",
+                                @"21" : @"Vous êtes nul",
+                                @"22" : @"Vous êtes nul",
+                                @"23" : @"Vous êtes nul",
+                                @"24" : @"Vous êtes nul",
+                                @"25" : @"Vous êtes nul",
+                                @"26" : @"Vous êtes nul",
+                                @"27" : @"Vous êtes nul",
+                                @"28" : @"Vous êtes nul",
+                                @"29" : @"Vous êtes nul",
+                                @"30" : @"Vous avez du en chier pour en arriver là, c'est con.",
+                                @"31" : @"Vous êtes nul",
+                                @"32" : @"Vous êtes nul",
+                                @"33" : @"Vous êtes nul",
+                                @"34" : @"Vous êtes nul",
+                                @"35" : @"Vous êtes nul",
+                                @"36" : @"Vous êtes nul",
+                                @"37" : @"Je suis sûr que vous y avez cru",
+                                @"38" : @"L'espoir est le privilège des perdants...",
+                                @"39" : @"Si prêt du but....et pourtant",
+                                @"40" : @"Vous ne pouviez pas faire mieux !",
+                                
+                                };
+    
+    [self setUpMotionView];
     [self setStopState];
+    
+    [[BLELabyrinth sharedInstance] didReceiveAuthorizationToWrite:^{
+        authorizeToSend = YES;
+    } orNumberHole:^(NSString *numberHole) {
+        
+        if (isPlaying){
+            
+            isPlaying = NO;
+            
+            [[[MotionManager sharedInstance] motionManager] stopAccelerometerUpdates];
+            [[[MotionManager sharedInstance] motionManager] stopDeviceMotionUpdates];
+            
+            [self performSelector:@selector(stopAction:) withObject:self];
+            
+           /* if ([numberHole isEqualToString:@"40"]){
+               self.titleLabel.text = @"Bravo, vous avez (enfin) gagné!";
+            }else{
+                self.titleLabel.text = [NSString stringWithFormat:@"Dommage...Perdu au trou %@",numberHole];
+            }*/
+            
+            //self.messageLabel.text = [holeMessage objectForKey:numberHole];
+
+            /*UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"trou #%@" ,numberHole]
+                                                             message:[holeMessage objectForKey:numberHole]
+                                                            delegate:self
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil];
+            [dialog show];*/
+        }
+
+        
+    }];
+}
+
+-(void) setUpMotionView{
     
     self.motionView.layer.cornerRadius = 50;
     
@@ -37,27 +118,28 @@
     
     // Add the gesture to the view
     [self.motionView addGestureRecognizer:touchOnView];
-    
-    [[BLELabyrinth sharedInstance] didReceiveAuthorizationToWrite:^{
-        authorizeToSend = YES;
-    }];
-    
-    
 }
+
+
 
 -(void) viewWillAppear:(BOOL)animated{
     // [[BLELabyrinth sharedInstance] bleShield].delegate = self;
 }
 
 -(void) touchBall{
+    [self setPlayingState];
     [self startMyMotionDetect];
 }
 
 - (IBAction)stopAction:(id)sender {
     
+    [[[MotionManager sharedInstance] motionManager] stopAccelerometerUpdates];
+    [[[MotionManager sharedInstance] motionManager] stopDeviceMotionUpdates];
+    [self sendAccelerometerDataToBLEMiniX:0 andY:0];
+    
     [self.view setBackgroundColor:[UIColor blackColor]];
     
-    [UIView animateWithDuration:3.0
+    [UIView animateWithDuration:2.0
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
@@ -70,21 +152,25 @@
                          self.motionView.transform = CGAffineTransformMakeScale(1.0, 1.0);
                          
                          [self setStopState];
-                         
-                         [[[MotionManager sharedInstance] motionManager] stopAccelerometerUpdates];
-                         [[[MotionManager sharedInstance] motionManager] stopDeviceMotionUpdates];
-                         
-                         
-                         
-                         
                      }];
 }
 
 -(void) setStopState{
     
+    authorizeToSend = YES;
+    isPlaying = NO;
+    
+    [self.motionView setUserInteractionEnabled:YES];
     self.startLabel.hidden = NO;
     self.stopButton.hidden = YES;
-    authorizeToSend = YES;
+}
+
+-(void) setPlayingState{
+    
+    isPlaying = YES;
+    [self.motionView setUserInteractionEnabled:NO];
+    self.startLabel.hidden = YES;
+    self.stopButton.hidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -96,6 +182,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [self performSelector:@selector(stopAction:) withObject:self];
     
     [[[MotionManager sharedInstance] motionManager] stopAccelerometerUpdates];
     [[[MotionManager sharedInstance] motionManager] stopDeviceMotionUpdates];
@@ -108,12 +195,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 - (void)startMyMotionDetect
 {
     __block float stepMoveFactor = 15;
-    
-    self.startLabel.hidden = YES;
-    self.stopButton.hidden = NO;
     
     [[[MotionManager sharedInstance] motionManager] startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init] withHandler:^(CMAccelerometerData *data, NSError *error)
      {
@@ -137,10 +222,7 @@
 
                              }
                              completion:nil];
-                            
-
-
-                            
+    
                         });
      }
      ];
@@ -151,7 +233,6 @@
          
          dispatch_async(dispatch_get_main_queue(),
                         ^{
-                            
                             if (authorizeToSend){
                                 
                                 [self sendAccelerometerDataToBLEMiniX:radiansToDegrees(motion.attitude.roll) andY:radiansToDegrees(motion.attitude.pitch)];
