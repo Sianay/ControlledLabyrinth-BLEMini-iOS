@@ -9,6 +9,7 @@
 #import "GameViewController.h"
 #import <CoreMotion/CoreMotion.h>
 #import "MotionManager.h"
+#import "HistoriqueDataHandler.h"
 
 /** Radians to Degrees **/
 #define radiansToDegrees( radians ) ( ( radians ) * ( 180.0 / M_PI ) )
@@ -87,17 +88,18 @@
             
             [self performSelector:@selector(stopAction:) withObject:self];
             
-            NSString *winnerTitle = @"Bravo vous avez (enfin) gagné !";
-            NSString *looserTitle = [NSString stringWithFormat:@"Perdu au trou %@",numberHole];
+            NSString *title = [NSString stringWithFormat:@"Perdu au trou %@",numberHole];
 
-            UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:[numberHole isEqualToString:@"40"]?winnerTitle:looserTitle
+            UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:title
                                                              message:[holeMessage objectForKey:numberHole]
                                                             delegate:self
                                                    cancelButtonTitle:@"OK"
                                                    otherButtonTitles:nil];
             [dialog show];
+            
+            [[HistoriqueDataHandler sharedInstance] writeData:@"jojo" numberHole:numberHole];
+            
         }
-
         
     }];
     
@@ -139,6 +141,7 @@
             break;
             
         default:
+            [self performSegueWithIdentifier:@"histoSegue" sender:self];
             break;
     }
     
