@@ -8,16 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BLELabyrinth.h"
+#import "SphereMenu.h"
 
-@interface GameViewController : UIViewController<BLEDelegate>
-
+@interface GameViewController : UIViewController<BLEDelegate,SphereMenuDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *motionView;
 @property (weak, nonatomic) IBOutlet UILabel *startLabel;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
-
-
-
 
 
 @end

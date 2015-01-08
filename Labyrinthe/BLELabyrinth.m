@@ -51,7 +51,6 @@ static BLELabyrinth *sharedInstance = nil;
         if(bleShield.activePeripheral.state == CBPeripheralStateConnected)
         {
             [[bleShield CM] cancelPeripheralConnection:bleShield.activePeripheral];
-            return;
         }
     
     if ([[BLELabyrinth sharedInstance] bleShield].peripherals)
@@ -60,6 +59,17 @@ static BLELabyrinth *sharedInstance = nil;
     [[[BLELabyrinth sharedInstance] bleShield] findBLEPeripherals:3];
     
     [NSTimer scheduledTimerWithTimeInterval:(float)3.0 target:self selector:@selector(connectionTimer:) userInfo:nil repeats:NO];
+}
+
+- (void) endConnection {
+    
+    if(bleShield.activePeripheral.state == CBPeripheralStateConnected)
+    {
+        [[bleShield CM] cancelPeripheralConnection:bleShield.activePeripheral];
+    }
+    
+    if ([[BLELabyrinth sharedInstance] bleShield].peripherals)
+        [[BLELabyrinth sharedInstance] bleShield].peripherals = nil;
 }
 
 -(void) connectionTimer:(NSTimer *)timer

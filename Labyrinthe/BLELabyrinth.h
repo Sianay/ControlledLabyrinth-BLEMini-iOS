@@ -16,6 +16,7 @@
 + (id)sharedInstance;
 
 - (void) startConnection;
+- (void) endConnection;
 - (void) didConnectwithCompletionHandler:(void(^)())handler orDidFail:(void(^)())errorHandler;
 - (void) didDisconnectwithCompletionHandler:(void(^)())handler;
 - (void) didReceiveAuthorizationToWrite:(void(^)())handler orNumberHole:(void(^)(NSString *numberHole))numberHandler;

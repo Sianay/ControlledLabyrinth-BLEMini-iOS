@@ -27,7 +27,7 @@
     } orDidFail:^{
         [self.activityIndicator stopAnimating];
         
-        UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Echec de la connection"
+        UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Echec de la connexion"
                                                          message:@"Impossible de se connecter au BLE Mini"
                                                         delegate:self
                                                cancelButtonTitle:@"OK"
@@ -40,6 +40,8 @@
 }
 
 -(void) viewWillAppear:(BOOL)animated {
+    [[BLELabyrinth sharedInstance] didDisconnectwithCompletionHandler:nil];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,21 +49,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)connectionAction:(id)sender {
     [self.activityIndicator startAnimating];
-    [[BLELabyrinth sharedInstance] startConnection];
+   [[BLELabyrinth sharedInstance] startConnection];
     
-    // [self performSegueWithIdentifier:@"pushToGame" sender:self];
+   //[self performSegueWithIdentifier:@"pushToGame" sender:self];
+
 }
 
 

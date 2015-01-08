@@ -36,7 +36,7 @@
                                 @"7" : @"Vous êtes tomber dans le panneau...euh enfin le trou",
                                 @"8" : @"Essayer avec plus de patience la prochaine fois.",
                                 @"9" : @"Tomber la, tomber tomber, tomber la baballe",
-                                @"10" : @"Vous êtes nul",
+                                @"10" : @"Le tout c'est de ne pas viser le trou",
                                 @"11" : @"Vous êtes nul",
                                 @"12" : @"Vous êtes nul",
                                 @"13" : @"Vous êtes nul",
@@ -46,7 +46,7 @@
                                 @"17" : @"Vous êtes nul",
                                 @"18" : @"Vous êtes nul",
                                 @"19" : @"Vous êtes nul",
-                                @"20" : @"Vous êtes nul",
+                                @"20" : @"Il ne faut pas abandonner à la moitié du chemin",
                                 @"21" : @"Vous êtes nul",
                                 @"22" : @"Vous êtes nul",
                                 @"23" : @"Vous êtes nul",
@@ -66,12 +66,13 @@
                                 @"37" : @"Je suis sûr que vous y avez cru",
                                 @"38" : @"L'espoir est le privilège des perdants...",
                                 @"39" : @"Si prêt du but....et pourtant",
-                                @"40" : @"Vous ne pouviez pas faire mieux !",
+                                @"40" : @"C'est vraiment pas de bol : vous êtes tombé dans le dernier trou avant l'arrivée",
                                 
                                 };
     
     [self setUpMotionView];
     [self setStopState];
+    [self initSphereMenu];
     
     [[BLELabyrinth sharedInstance] didReceiveAuthorizationToWrite:^{
         authorizeToSend = YES;
@@ -88,16 +89,6 @@
             
             NSString *winnerTitle = @"Bravo vous avez (enfin) gagné !";
             NSString *looserTitle = [NSString stringWithFormat:@"Perdu au trou %@",numberHole];
-            
-           /* if ([numberHole isEqualToString:@"40"]){
-               self.titleLabel.text = winnerTitle;
-            }else{
-                self.titleLabel.text = [NSString stringWithFormat:@"Dommage...Perdu au trou %@",numberHole];
-            }*/
-            
-            //self.messageLabel.text = [holeMessage objectForKey:numberHole];
-            
-
 
             UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:[numberHole isEqualToString:@"40"]?winnerTitle:looserTitle
                                                              message:[holeMessage objectForKey:numberHole]
@@ -109,7 +100,51 @@
 
         
     }];
+    
+    [[BLELabyrinth sharedInstance] didDisconnectwithCompletionHandler:^{
+        
+        UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:@"Perte de la connexion"
+                                                         message:@"Vous avez été déconnecté de Ble Mini"
+                                                        delegate:self
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+        [dialog show];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
+
+-(void) initSphereMenu{
+    UIImage *startImage = [UIImage imageNamed:@"menu"];
+    UIImage *image1 = [UIImage imageNamed:@"delete_menu"];
+    UIImage *image2 = [UIImage imageNamed:@"score_menu"];
+   // UIImage *image3 = [UIImage imageNamed:@"info_menu"];
+    NSArray *images = @[image1,image2];
+    
+    SphereMenu *sphereMenu = [[SphereMenu alloc] initWithStartPoint:CGPointMake(240, 295) startImage:startImage submenuImages:images];
+    sphereMenu.delegate = self;
+    
+    [self.view addSubview:sphereMenu];
+    
+}
+
+- (void)sphereDidSelected:(int)index
+{
+    NSLog(@"sphere %d selected", index);
+    
+    switch (index) {
+        case 0:
+            [self.navigationController popViewControllerAnimated:YES];
+            [[BLELabyrinth sharedInstance] endConnection];
+            break;
+            
+        default:
+            break;
+    }
+    
+
+}
+
 
 -(void) setUpMotionView{
     
@@ -128,7 +163,6 @@
 
 
 -(void) viewWillAppear:(BOOL)animated{
-    // [[BLELabyrinth sharedInstance] bleShield].delegate = self;
 }
 
 -(void) touchBall{
@@ -249,7 +283,7 @@
     
 }
 
--(void) sendAccelerometerDataToBLEMiniX:(double) xAcceleration andY:(double) yAcceleration{
+-(void) sendAccelerometerDataToBLEMiniX:(double) xAcceleration andY:(double) yAcceleration {
     
     NSString *message = [NSString stringWithFormat:@"%d,%d/",(int)xAcceleration, (int)yAcceleration];
     

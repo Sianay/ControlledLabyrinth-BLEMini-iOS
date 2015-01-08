@@ -16,6 +16,7 @@
 		4A387ADE1A2DB2B300B391D5 /* LabyrintheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A387ADD1A2DB2B300B391D5 /* LabyrintheTests.m */; };
 		4A387AE81A2DD0A700B391D5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A387AE71A2DD0A700B391D5 /* CoreMotion.framework */; };
 		4A387AEB1A2DF22500B391D5 /* MotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A387AEA1A2DF22500B391D5 /* MotionManager.m */; };
+		4AC12F3C1A5E8F52006462B6 /* SphereMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC12F3B1A5E8F51006462B6 /* SphereMenu.m */; };
 		4ADC2C801A31A09C002C2994 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ADC2C7F1A31A09C002C2994 /* CoreBluetooth.framework */; };
 		4ADC2C851A31A3B4002C2994 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC2C831A31A3B4002C2994 /* BLE.m */; };
 		4ADC2C8B1A31A597002C2994 /* ConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ADC2C8A1A31A597002C2994 /* ConnectionViewController.m */; };
@@ -49,6 +50,8 @@
 		4A387AE71A2DD0A700B391D5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		4A387AE91A2DF22500B391D5 /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		4A387AEA1A2DF22500B391D5 /* MotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionManager.m; sourceTree = "<group>"; };
+		4AC12F3A1A5E8F51006462B6 /* SphereMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereMenu.h; sourceTree = "<group>"; };
+		4AC12F3B1A5E8F51006462B6 /* SphereMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SphereMenu.m; sourceTree = "<group>"; };
 		4ADC2C7F1A31A09C002C2994 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		4ADC2C821A31A3B4002C2994 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
 		4ADC2C831A31A3B4002C2994 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
@@ -142,9 +145,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4AC12F391A5E8F3F006462B6 /* SphereMenu */ = {
+			isa = PBXGroup;
+			children = (
+				4AC12F3A1A5E8F51006462B6 /* SphereMenu.h */,
+				4AC12F3B1A5E8F51006462B6 /* SphereMenu.m */,
+			);
+			name = SphereMenu;
+			sourceTree = "<group>";
+		};
 		4ADC2C7E1A31A086002C2994 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4AC12F391A5E8F3F006462B6 /* SphereMenu */,
 				4A387AE71A2DD0A700B391D5 /* CoreMotion.framework */,
 				4ADC2C7F1A31A09C002C2994 /* CoreBluetooth.framework */,
 				4ADC2C811A31A3B4002C2994 /* BLE */,
@@ -276,6 +289,7 @@
 				4A387ACA1A2DB2B300B391D5 /* GameViewController.m in Sources */,
 				4A387AC71A2DB2B300B391D5 /* AppDelegate.m in Sources */,
 				4ADC2C8F1A31AD4C002C2994 /* BLELabyrinth.m in Sources */,
+				4AC12F3C1A5E8F52006462B6 /* SphereMenu.m in Sources */,
 				4ADC2C8B1A31A597002C2994 /* ConnectionViewController.m in Sources */,
 				4A387AC41A2DB2B300B391D5 /* main.m in Sources */,
 				4ADC2C851A31A3B4002C2994 /* BLE.m in Sources */,
