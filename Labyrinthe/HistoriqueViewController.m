@@ -24,20 +24,35 @@ static NSString *const CellIdentifier = @"Cell";
     [super viewDidLoad];
     
     void (^configureCell)(HistoriqueTableViewCell*, NSDictionary*) = ^(HistoriqueTableViewCell* cell, NSDictionary *dict) {
-        cell.dateLabel.text = [NSString stringWithFormat:@"%@ le %@",[dict objectForKey:@"pseudo"],[dict objectForKey:@"date"]];
-        cell.trouLabel.text = [NSString stringWithFormat:@"Trou #%@",[dict objectForKey:@"hole"] ];
+        
+        cell.dateLabel.text = [NSString stringWithFormat:@"%@ le %@",[dict objectForKey:@"pseudo"],[self formatDate:[dict objectForKey:@"date"]]];
+        cell.trouLabel.text = [NSString stringWithFormat:@"Score : %@",[dict objectForKey:@"hole"] ];
     };
     
     NSDictionary *data = [[HistoriqueDataHandler sharedInstance] readData];
     NSArray *array = [data objectForKey:@"tab"];
 
+    NSArray *aSortedArray = [array sortedArrayUsingComparator:^(NSMutableDictionary *obj1,NSMutableDictionary *obj2) {
+        NSString *num1 =[obj1 objectForKey:@"hole"];
+        NSString *num2 =[obj2 objectForKey:@"hole"];
+        return (NSComparisonResult) [num2 compare:num1 options:(NSNumericSearch)];
+    }];
+    
 
-    self.historiqueArrayDataSource = [[ArrayDataSource alloc] initWithItems:array                                                           cellIdentifier:CellIdentifier
+    self.historiqueArrayDataSource = [[ArrayDataSource alloc] initWithItems:aSortedArray                                                           cellIdentifier:CellIdentifier
         configureCellBlock:configureCell];
     
     self.historiqueTableView.dataSource = self.historiqueArrayDataSource;
     
     
+}
+
+- (NSString*) formatDate:(NSDate*) date
+{
+    NSDateFormatter * dateFormatterDate = [NSDateFormatter new];
+    [dateFormatterDate setDateFormat:@"dd/MM/YYYY à HH:mm"] ;
+    
+    return [[dateFormatterDate stringFromDate:date] stringByReplacingOccurrencesOfString:@":" withString:@"h"];
 }
 
 - (void)didReceiveMemoryWarning {
