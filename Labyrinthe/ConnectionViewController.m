@@ -53,6 +53,7 @@
     [self.activityIndicator startAnimating];
    [[BLELabyrinth sharedInstance] startConnection];
     
+   // to debug
    //[self performSegueWithIdentifier:@"pushToGame" sender:self];
 
 }

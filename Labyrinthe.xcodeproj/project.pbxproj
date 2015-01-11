@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		41FD415F1A5F49AD001E6866 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD415E1A5F49AD001E6866 /* AVFoundation.framework */; };
-		41FD41611A5F49F5001E6866 /* fail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 41FD41601A5F49F5001E6866 /* fail.wav */; };
 		41FD41631A5F4A97001E6866 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD41621A5F4A97001E6866 /* AudioToolbox.framework */; };
 		4A387AC41A2DB2B300B391D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A387AC31A2DB2B300B391D5 /* main.m */; };
 		4A387AC71A2DB2B300B391D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A387AC61A2DB2B300B391D5 /* AppDelegate.m */; };
@@ -19,6 +18,7 @@
 		4A387ADE1A2DB2B300B391D5 /* LabyrintheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A387ADD1A2DB2B300B391D5 /* LabyrintheTests.m */; };
 		4A387AE81A2DD0A700B391D5 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A387AE71A2DD0A700B391D5 /* CoreMotion.framework */; };
 		4A387AEB1A2DF22500B391D5 /* MotionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A387AEA1A2DF22500B391D5 /* MotionManager.m */; };
+		4AB07C551A628CC000393183 /* fail.wav in Resources */ = {isa = PBXBuildFile; fileRef = 4AB07C541A628CC000393183 /* fail.wav */; };
 		4AC12F3C1A5E8F52006462B6 /* SphereMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC12F3B1A5E8F51006462B6 /* SphereMenu.m */; };
 		4AC12F3F1A5ECA21006462B6 /* HistoriqueDataHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC12F3E1A5ECA21006462B6 /* HistoriqueDataHandler.m */; };
 		4AC12F431A5EDA19006462B6 /* HistoriqueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AC12F421A5EDA19006462B6 /* HistoriqueViewController.m */; };
@@ -42,7 +42,6 @@
 
 /* Begin PBXFileReference section */
 		41FD415E1A5F49AD001E6866 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		41FD41601A5F49F5001E6866 /* fail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fail.wav; sourceTree = "<group>"; };
 		41FD41621A5F4A97001E6866 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		4A387ABE1A2DB2B300B391D5 /* Labyrinthe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Labyrinthe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A387AC21A2DB2B300B391D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		4A387AE71A2DD0A700B391D5 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		4A387AE91A2DF22500B391D5 /* MotionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionManager.h; sourceTree = "<group>"; };
 		4A387AEA1A2DF22500B391D5 /* MotionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionManager.m; sourceTree = "<group>"; };
+		4AB07C541A628CC000393183 /* fail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fail.wav; sourceTree = "<group>"; };
 		4AC12F3A1A5E8F51006462B6 /* SphereMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SphereMenu.h; sourceTree = "<group>"; };
 		4AC12F3B1A5E8F51006462B6 /* SphereMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SphereMenu.m; sourceTree = "<group>"; };
 		4AC12F3D1A5ECA21006462B6 /* HistoriqueDataHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoriqueDataHandler.h; sourceTree = "<group>"; };
@@ -105,7 +105,6 @@
 		4A387AB51A2DB2B300B391D5 = {
 			isa = PBXGroup;
 			children = (
-				41FD41601A5F49F5001E6866 /* fail.wav */,
 				4A387AC01A2DB2B300B391D5 /* Labyrinthe */,
 				4A387ADA1A2DB2B300B391D5 /* LabyrintheTests */,
 				4A387ABF1A2DB2B300B391D5 /* Products */,
@@ -124,12 +123,13 @@
 		4A387AC01A2DB2B300B391D5 /* Labyrinthe */ = {
 			isa = PBXGroup;
 			children = (
+				4AB07C541A628CC000393183 /* fail.wav */,
 				4A387AC51A2DB2B300B391D5 /* AppDelegate.h */,
 				4A387AC61A2DB2B300B391D5 /* AppDelegate.m */,
 				4AC12F441A5EDB1F006462B6 /* Connection */,
 				4AC12F451A5EDB26006462B6 /* Game */,
 				4AC12F461A5EDB2E006462B6 /* Historique */,
-				4ADC2C8C1A31A63F002C2994 /* Manager */,
+				4AB07C561A628D2900393183 /* Handler */,
 				4A387ACE1A2DB2B300B391D5 /* Images.xcassets */,
 				4A387ACB1A2DB2B300B391D5 /* Main.storyboard */,
 				4A387AD01A2DB2B300B391D5 /* LaunchScreen.xib */,
@@ -163,6 +163,20 @@
 				4A387ADC1A2DB2B300B391D5 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4AB07C561A628D2900393183 /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				4A387AE91A2DF22500B391D5 /* MotionManager.h */,
+				4A387AEA1A2DF22500B391D5 /* MotionManager.m */,
+				4ADC2C8D1A31AD4C002C2994 /* BLELabyrinth.h */,
+				4ADC2C8E1A31AD4C002C2994 /* BLELabyrinth.m */,
+				4AC12F4B1A5EE295006462B6 /* ArrayDataSource.h */,
+				4AC12F4C1A5EE295006462B6 /* ArrayDataSource.m */,
+				4AC12F401A5ECA27006462B6 /* Historique */,
+			);
+			name = Handler;
 			sourceTree = "<group>";
 		};
 		4AC12F391A5E8F3F006462B6 /* SphereMenu */ = {
@@ -223,15 +237,12 @@
 		4ADC2C7E1A31A086002C2994 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4AC12F4B1A5EE295006462B6 /* ArrayDataSource.h */,
-				4AC12F4C1A5EE295006462B6 /* ArrayDataSource.m */,
-				4AC12F401A5ECA27006462B6 /* Historique */,
+				4ADC2C811A31A3B4002C2994 /* BLE */,
 				4AC12F391A5E8F3F006462B6 /* SphereMenu */,
 				41FD415E1A5F49AD001E6866 /* AVFoundation.framework */,
 				41FD41621A5F4A97001E6866 /* AudioToolbox.framework */,
 				4A387AE71A2DD0A700B391D5 /* CoreMotion.framework */,
 				4ADC2C7F1A31A09C002C2994 /* CoreBluetooth.framework */,
-				4ADC2C811A31A3B4002C2994 /* BLE */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -244,17 +255,6 @@
 				4ADC2C841A31A3B4002C2994 /* BLEDefines.h */,
 			);
 			path = BLE;
-			sourceTree = "<group>";
-		};
-		4ADC2C8C1A31A63F002C2994 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				4A387AE91A2DF22500B391D5 /* MotionManager.h */,
-				4A387AEA1A2DF22500B391D5 /* MotionManager.m */,
-				4ADC2C8D1A31AD4C002C2994 /* BLELabyrinth.h */,
-				4ADC2C8E1A31AD4C002C2994 /* BLELabyrinth.m */,
-			);
-			name = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,7 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41FD41611A5F49F5001E6866 /* fail.wav in Resources */,
+				4AB07C551A628CC000393183 /* fail.wav in Resources */,
 				4A387ACD1A2DB2B300B391D5 /* Main.storyboard in Resources */,
 				4A387AD21A2DB2B300B391D5 /* LaunchScreen.xib in Resources */,
 				4A387ACF1A2DB2B300B391D5 /* Images.xcassets in Resources */,
